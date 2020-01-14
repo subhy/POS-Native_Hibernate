@@ -1,8 +1,14 @@
 package entity;
 
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class OrderDetailPK {
 
+    @Column(name = "orderId")
     private int orderId;
+    @Column(name = "itemCode")
     private String itemCode;
 
     public OrderDetailPK() {

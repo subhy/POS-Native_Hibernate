@@ -2,6 +2,8 @@ package entity;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "`Order`")
@@ -13,6 +15,8 @@ public class Order implements SuperEntity {
     @ManyToOne
     @JoinColumn(name = "customerId",referencedColumnName = "customerId")
     private Customer customer;
+    @OneToMany(mappedBy = "order")
+    private List<OrderDetail> orderDetails=new ArrayList<>();
 
     public Order() {
     }
@@ -45,6 +49,16 @@ public class Order implements SuperEntity {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public List<OrderDetail> getOrderDetails() {
+        return orderDetails;
+    }
+
+    public void addOrderDetails(OrderDetail orderDetails) {
+        orderDetails.setOrder(this);
+        this.orderDetails.add(orderDetails);
+
     }
 
     @Override
