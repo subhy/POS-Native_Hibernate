@@ -1,11 +1,23 @@
 package entity;
 
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
 public class Customer implements SuperEntity {
 
+    @Id
     private String customerId;
     private String name;
     private String address;
 //    private Gender gender;
+    @OneToMany(mappedBy ="customer")
+    private List<Order> orders=new ArrayList<>();
 
     public Customer() {
     }
@@ -55,21 +67,32 @@ public class Customer implements SuperEntity {
         this.address = address;
     }
 
-//    public Gender getGender() {
-//        return gender;
-//    }
-//
-//    public void setGender(Gender gender) {
-//        this.gender = gender;
-//    }
+    public List<Order> getOrders() {
+        return orders;
+    }
 
+    public void addOrder(Order orders) {
+       orders.setCustomer(this);
+       this.orders.add(orders);
+
+    }
+
+    public void removeOrder(Order order) {
+       if (order.getCustomer()!=this){
+           throw new RuntimeException("Invalid Order");
+       }else{
+           order.setCustomer(null);
+           this.getOrders().remove(order);
+       }
+
+    }
     @Override
     public String toString() {
         return "Customer{" +
                 "customerId='" + customerId + '\'' +
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
-//                ", gender=" + gender +
+//
                 '}';
     }
 }
