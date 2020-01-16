@@ -1,10 +1,7 @@
 package entity;
 
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,8 +12,7 @@ public class Customer implements SuperEntity {
     private String customerId;
     private String name;
     private String address;
-//    private Gender gender;
-    @OneToMany(mappedBy ="customer")
+    @OneToMany(mappedBy ="customer",cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.DETACH,CascadeType.MERGE})
     private List<Order> orders=new ArrayList<>();
 
     public Customer() {
@@ -27,21 +23,6 @@ public class Customer implements SuperEntity {
         this.name = name;
         this.address = address;
     }
-
-//    public Customer(String customerId, String name, String address, Gender gender) {
-//        this.customerId = customerId;
-//        this.name = name;
-//        this.address = address;
-//        this.setGender(gender);
-//    }
-
-    //    public Customer(String customerId, String name, String address) {
-//        this.customerId = customerId;
-//        this.name = name;
-//        this.address = address;
-//    }
-
-
 
     public String getCustomerId() {
         return customerId;
