@@ -24,6 +24,7 @@ public class Customer implements SuperEntity {
         this.address = address;
     }
 
+
     public String getCustomerId() {
         return customerId;
     }

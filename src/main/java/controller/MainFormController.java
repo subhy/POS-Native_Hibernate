@@ -1,6 +1,7 @@
 package controller;
 
 import com.jfoenix.controls.JFXProgressBar;
+import db.HibernateUtil;
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
@@ -29,6 +30,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ResourceBundle;
+
 
 public class MainFormController implements Initializable {
     public JFXProgressBar pgb;
@@ -160,10 +162,10 @@ public class MainFormController implements Initializable {
 
         if (file != null) {
             String[] commands;
-            if (DBConnection.password.length() > 0) {
-                commands = new String[]{"mysql", "-h", DBConnection.host, "--port", DBConnection.port, "-u", DBConnection.user, "-p" + DBConnection.password, DBConnection.db, "-e", "source " + file.getAbsolutePath()};
+            if (HibernateUtil.getPassword().length() > 0) {
+                commands = new String[]{"mysql", "-h", HibernateUtil.getHost(), "--port", HibernateUtil.getPort(), "-u", HibernateUtil.getUsername(), "-p" +HibernateUtil.getPassword(), HibernateUtil.getDatabase(), "-e", "source " + file.getAbsolutePath()};
             } else {
-                commands = new String[]{"mysql", "-h", DBConnection.host, "--port", DBConnection.port, "-u", DBConnection.user, DBConnection.db, "-e", "source " + file.getAbsolutePath()};
+                commands = new String[]{"mysql", "-h", HibernateUtil.getHost(), "--port", HibernateUtil.getPort(), "-u",HibernateUtil.getUsername(),HibernateUtil.getDatabase(), "-e", "source " + file.getAbsolutePath()};
             }
             this.root.getScene().setCursor(Cursor.WAIT);
             pgb.setVisible(true);
