@@ -8,6 +8,7 @@ import lk.sudha.pos.hibernate.business.custom.OrderBO;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import lk.sudha.pos.hibernate.db.HibernateUtil;
 import lk.sudha.pos.hibernate.dto.CustomerDTO;
 import lk.sudha.pos.hibernate.dto.ItemDTO;
 import lk.sudha.pos.hibernate.dto.OrderDTO;
@@ -33,14 +34,18 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.sudha.pos.hibernate.util.OrderDetailTM;
+import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 import java.io.IOException;
 import java.net.URL;
 import java.text.NumberFormat;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -340,7 +345,7 @@ public class PlaceOrderFormController implements Initializable {
            /* JasperReport jasperReport = (JasperReport) JRLoader.loadObject(this.getClass().getResourceAsStream("/lk/ijse/dep/pos/report/order-report.jasper"));
             Map<String, Object> params = new HashMap<>();
             params.put("orderId", orderId + "");
-            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, DBConnection.getInstance().getConnection());
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params,);
             JasperViewer.viewReport(jasperPrint, false);*/
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, "Something went wrong, please contact DEPPO").show();

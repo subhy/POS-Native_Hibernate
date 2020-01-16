@@ -29,6 +29,7 @@ public class OrderBOImpl implements OrderBO {
     @Override
     public int getLastOrderId() throws Exception {
       try (Session session= HibernateUtil.getSessionFactory().openSession()){
+          orderDAO.setSession(session);
           session.beginTransaction();
           int lastOrderId = orderDAO.getLastOrderId();
           session.getTransaction().commit();
@@ -62,9 +63,6 @@ public class OrderBOImpl implements OrderBO {
             }
 
             session.getTransaction().commit();
-
-        } catch (Throwable e) {
-
 
         }
     }

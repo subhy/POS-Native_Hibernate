@@ -109,8 +109,8 @@ public class ManageCustomerFormController implements Initializable {
         Map<String, Object> params = new HashMap<>();
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,
                 params, new JRBeanCollectionDataSource(tblCustomers.getItems()));
+        JasperViewer.viewReport(jasperPrint,false);
 
-        JasperViewer.viewReport(jasperPrint);
     }
 
     @FXML
