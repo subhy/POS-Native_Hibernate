@@ -15,7 +15,7 @@ public class OrderDetail implements SuperEntity{
     @JoinColumn(name = "itemCode",referencedColumnName = "code",insertable = false,updatable = false)
     private Item item;
     @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.DETACH,CascadeType.MERGE})
-    @JoinColumn(name = "orderId",referencedColumnName = "id")
+    @JoinColumn(name = "orderId",referencedColumnName = "id",insertable = false,updatable = false)
         private Order order;
 
     public OrderDetail() {

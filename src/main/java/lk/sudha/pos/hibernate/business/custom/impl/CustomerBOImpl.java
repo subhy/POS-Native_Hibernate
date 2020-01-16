@@ -60,10 +60,8 @@ public class CustomerBOImpl implements CustomerBO {
     @Override
     public List<CustomerDTO> findAllCustomers() throws Exception {
         try (Session session=HibernateUtil.getSessionFactory().openSession()) {
-            session.beginTransaction();
             customerDAO.setSession(session);
-
-
+            session.beginTransaction();
             List<Customer> alCustomers = customerDAO.findAll();
             List<CustomerDTO> dtos = new ArrayList<>();
             for (Customer customer : alCustomers) {
@@ -73,6 +71,7 @@ public class CustomerBOImpl implements CustomerBO {
         session.getTransaction().commit();
         return dtos;
     }
+
     }
 
     @Override
